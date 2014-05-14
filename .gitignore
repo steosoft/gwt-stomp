@@ -1,0 +1,23 @@
+# generated stuff
+target/
+generated/
+test-output/
+gwt-unitCache/
+src/main/webapp/WEB-INF/classes/
+
+# eclipse genereted
+.settings
+.project
+.classpath
+
+# java & gwt compiler
+*.class
+.gwt
+
+# errai
+.errai
+
+# other
+*.bak
+.springBeans
+*.log
