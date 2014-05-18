@@ -16,6 +16,7 @@ public class StompClient {
     private JavaScriptObject jsoStompClient;
     private boolean isConnected = false;
     private Map<String, Subscription> subscriptions;
+    private boolean enableDebug;
 
     public static interface Callback {
         void onConnect();
@@ -25,11 +26,12 @@ public class StompClient {
         void onDisconnect();
     }
 
-    public StompClient(String wsURL, Callback callback, boolean useSockJs) {
+    public StompClient(String wsURL, Callback callback, boolean useSockJs, boolean enableDebug) {
         this.useSockJs = useSockJs;
         this.wsURL = wsURL;
         this.callback = callback;
         this.subscriptions = new HashMap<String, Subscription>();
+        this.enableDebug = enableDebug;
     }
 
     public final void connect() {
@@ -39,7 +41,7 @@ public class StompClient {
         }
 
         logger.log(Level.FINE, "Connecting to '" + wsURL + "' ...");
-        __connect(wsURL, useSockJs);
+        __connect(wsURL, useSockJs, enableDebug);
     }
 
     public final void disconnect() {
@@ -79,7 +81,7 @@ public class StompClient {
         self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.send(destination, {}, jsonString);
     }-*/;
 
-    private native final void __connect(String wsURL, boolean overSockJs)
+    private native final void __connect(String wsURL, boolean overSockJs, boolean enableDebug)
     /*-{
         var self = this;
 
@@ -99,6 +101,10 @@ public class StompClient {
             self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.over(socket);
         } else {
             self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.client(wsURL);
+        }
+
+        if (self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient != null && !enableDebug) {
+            self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.debug = null;
         }
 
         self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.connect({}, onConnected);
