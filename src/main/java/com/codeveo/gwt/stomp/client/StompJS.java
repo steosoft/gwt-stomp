@@ -1,4 +1,4 @@
-package net.nerdrobot.gwt.stomp.client;
+package com.codeveo.gwt.stomp.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;

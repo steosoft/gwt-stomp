@@ -1,4 +1,4 @@
-package net.nerdrobot.gwt.stomp.client;
+package com.codeveo.gwt.stomp.client;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +78,7 @@ public class StompClient {
     public native final void send(String destination, String jsonString)
     /*-{
         var self = this;
-        self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.send(destination, {}, jsonString);
+        self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.send(destination, {}, jsonString);
     }-*/;
 
     private native final void __connect(String wsURL, boolean overSockJs, boolean enableDebug)
@@ -86,28 +86,28 @@ public class StompClient {
         var self = this;
 
     	var onConnected = function () {
-            self.@net.nerdrobot.gwt.stomp.client.StompClient::onConnected()();
+            self.@com.codeveo.gwt.stomp.client.StompClient::onConnected()();
         };
 
         // TODO: Not used. Could not add to connect() because stomp.connect() is looking
         //       for Function object while parsing arguments.
     	var onError = function (cause) {
-    		self.@net.nerdrobot.gwt.stomp.client.StompClient::onError(Ljava/lang/String;)(cause);
+    		self.@com.codeveo.gwt.stomp.client.StompClient::onError(Ljava/lang/String;)(cause);
     	};
 
         if (overSockJs === true) {
             var socket = new $wnd.SockJS(wsURL);
 
-            self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.over(socket);
+            self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.over(socket);
         } else {
-            self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.client(wsURL);
+            self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient = $wnd.Stomp.client(wsURL);
         }
 
-        if (self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient != null && !enableDebug) {
-            self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.debug = null;
+        if (self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient != null && !enableDebug) {
+            self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.debug = null;
         }
 
-        self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.connect({}, onConnected);
+        self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.connect({}, onConnected);
     }-*/;
 
     private native final void __disconnect()
@@ -115,10 +115,10 @@ public class StompClient {
     	var self = this;
 
     	var ondisconnect = function(){
-    		self.@net.nerdrobot.gwt.stomp.client.StompClient::onDisconnect()();
+    		self.@com.codeveo.gwt.stomp.client.StompClient::onDisconnect()();
     	};
 
-    	self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.disconnect(ondisconnect);
+    	self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.disconnect(ondisconnect);
     }-*/;
 
     private native final Subscription __subscribe(String destination, MessageListener listener)
@@ -126,10 +126,10 @@ public class StompClient {
         var self = this;
 
     	var onMessage = function (message) {
-    		listener.@net.nerdrobot.gwt.stomp.client.MessageListener::onMessage(Lnet/nerdrobot/gwt/stomp/client/Message;)(message);
+    		listener.@com.codeveo.gwt.stomp.client.MessageListener::onMessage(Lcom/codeveo/gwt/stomp/client/Message;)(message);
     	};
 
-    	var subscription = self.@net.nerdrobot.gwt.stomp.client.StompClient::jsoStompClient.subscribe(destination, onMessage);
+    	var subscription = self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.subscribe(destination, onMessage);
 
      	return subscription;
     }-*/;
