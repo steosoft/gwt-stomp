@@ -6,7 +6,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 public class StompJS {
-    public static final String STOMP_VERSION = "2.3.3";
+    public static final String STOMP_VERSION = "2.3.4";
     public static final String SOCKJS_VERSION = "0.3.4";
 
     protected interface JsClientBundle extends ClientBundle {
