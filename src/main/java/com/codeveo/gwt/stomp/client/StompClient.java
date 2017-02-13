@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 
 public class StompClient {
     private static final Logger logger = Logger.getLogger(StompClient.class.getName());
@@ -35,13 +36,19 @@ public class StompClient {
     }
 
     public final void connect() {
+        connect("{}");
+    }
+        
+    public final void connect(String headers) {
         if (isConnected) {
             logger.log(Level.FINE, "Already connected");
             return;
         }
+            
+        JavaScriptObject jsHeaders = JsonUtils.safeEval(headers);
 
         logger.log(Level.FINE, "Connecting to '" + wsURL + "' ...");
-        __connect(wsURL, useSockJs, enableDebug);
+        __connect(wsURL, useSockJs, enableDebug, jsHeaders);
     }
 
     public final void disconnect() {
@@ -81,7 +88,7 @@ public class StompClient {
         self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.send(destination, {}, jsonString);
     }-*/;
 
-    private native final void __connect(String wsURL, boolean overSockJs, boolean enableDebug)
+    private native final void __connect(String wsURL, boolean overSockJs, boolean enableDebug, JavaScriptObject headers)
     /*-{
         var self = this;
 
@@ -107,7 +114,7 @@ public class StompClient {
             self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.debug = null;
         }
 
-        self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.connect({}, onConnected);
+        self.@com.codeveo.gwt.stomp.client.StompClient::jsoStompClient.connect(headers, onConnected);
     }-*/;
 
     private native final void __disconnect()
